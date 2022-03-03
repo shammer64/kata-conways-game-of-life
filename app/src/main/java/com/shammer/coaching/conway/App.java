@@ -14,14 +14,12 @@ public class App {
     public static final String ARGS_MSG = "Three positive integer args are expected";
 
     public static void main(String[] args) {
-        if (args.length != 3) throw new IllegalArgumentException(ARGS_MSG);
+        if (args.length != 2) throw new IllegalArgumentException(ARGS_MSG);
         int rows;
         int cols;
-        int generations;
         try {
             rows = Integer.parseInt(args[0]);
             cols = Integer.parseInt(args[1]);
-            generations = Integer.parseInt(args[2]);
             if (rows <= 0 || cols <= 0) throw new IllegalArgumentException(ARGS_MSG);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ARGS_MSG, e);
