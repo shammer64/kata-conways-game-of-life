@@ -61,7 +61,6 @@ public class GameOfLife {
     public int neighbors(int row, int col) {
         AtomicInteger liveCount = new AtomicInteger();
         Bounds bounds = getBounds(row, col);
-        //System.out.format("Row %d,%d Col %d,%d\n", lowerRowBound, upperRowBound, lowerColBound, upperColBound);
 
         rangeClosed(bounds.lowerRowBound, bounds.upperRowBound)
                 .forEach(x -> IntStream.rangeClosed(bounds.lowerColBound, bounds.upperColBound)
@@ -69,7 +68,6 @@ public class GameOfLife {
                         .filter(y -> x != row || y != col)
                         .forEach(y -> {
                             liveCount.getAndIncrement();
-                            // System.out.format("%d,%d %s\n", x, y, grid[x][y]);
                         })
                 );
         return liveCount.get();
