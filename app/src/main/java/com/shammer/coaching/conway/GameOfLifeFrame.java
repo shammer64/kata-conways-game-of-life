@@ -5,13 +5,10 @@ import java.awt.*;
 
 public class GameOfLifeFrame extends JFrame {
 
-    private final JPanel panel;
-
     public GameOfLifeFrame(GameOfLife gameEngine, int generations) throws HeadlessException {
         super();
-        panel = new GameOfLifePanel(gameEngine, generations);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(panel);
+        this.add(new GameOfLifePanel(gameEngine, generations));
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
