@@ -11,23 +11,27 @@ import static java.util.stream.IntStream.range;
 
 public class App {
 
-    public static final String ARGS_MSG = "Three positive integer args are expected";
+    public static final String ARGS_MSG = "Up to three positive integer args are expected: rows, columns and generations to run";
 
     public static void main(String[] args) {
-        if (args.length != 2) throw new IllegalArgumentException(ARGS_MSG);
-        int rows;
-        int cols;
+        int rows = 80;
+        int cols = 50;
+        int generations = 500;
         try {
-            rows = Integer.parseInt(args[0]);
-            cols = Integer.parseInt(args[1]);
-            if (rows <= 0 || cols <= 0) throw new IllegalArgumentException(ARGS_MSG);
+            if (args.length >= 1)
+                rows = Integer.parseInt(args[0]);
+            if (args.length >= 2)
+                cols = Integer.parseInt(args[1]);
+            if (args.length >= 3)
+                generations = Integer.parseInt(args[2]);
+            if (rows <= 0 || cols <= 0 || generations <= 0) throw new IllegalArgumentException(ARGS_MSG);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ARGS_MSG, e);
         }
 
         // generate random starting grid
         Character[][] initialGameGrid = generateRandomGrid(rows, cols);
-        JFrame frame = new GameOfLifeFrame(new GameOfLife(initialGameGrid));
+        JFrame frame = new GameOfLifeFrame(new GameOfLife(initialGameGrid), generations);
     }
 
     private static Character[][] generateRandomGrid(int rows, int cols) {

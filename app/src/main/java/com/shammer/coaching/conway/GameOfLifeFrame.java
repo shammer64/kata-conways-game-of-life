@@ -7,9 +7,9 @@ public class GameOfLifeFrame extends JFrame {
 
     private final JPanel panel;
 
-    public GameOfLifeFrame(GameOfLife gameEngine) throws HeadlessException {
+    public GameOfLifeFrame(GameOfLife gameEngine, int generations) throws HeadlessException {
         super();
-        panel = new GameOfLifePanel(gameEngine);
+        panel = new GameOfLifePanel(gameEngine, generations);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(panel);
         this.pack();

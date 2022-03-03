@@ -10,15 +10,17 @@ import static java.util.stream.IntStream.range;
 public class GameOfLifePanel extends JPanel implements ActionListener {
 
     private final GameOfLife gameEngine;
+    private final int maxGenerations;
     private int PANEL_WIDTH = 500;
     private int PANEL_HEIGHT = 500;
     private int CELL_SIZE = 20;
     Timer timer;
     private int generation = 0;
 
-    public GameOfLifePanel(GameOfLife gameEngine) {
+    public GameOfLifePanel(GameOfLife gameEngine, int generations) {
         super();
         this.gameEngine = gameEngine;
+        this.maxGenerations = generations;
         this.PANEL_WIDTH = gameEngine.width() * CELL_SIZE;
         this.PANEL_HEIGHT = gameEngine.height() * CELL_SIZE;
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -45,8 +47,12 @@ public class GameOfLifePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gameEngine.evolve();
-        generation++;
-        repaint();
+        if (generation < maxGenerations) {
+            gameEngine.evolve();
+            generation++;
+            repaint();
+        } else {
+            timer.stop();
+        }
     }
 }
