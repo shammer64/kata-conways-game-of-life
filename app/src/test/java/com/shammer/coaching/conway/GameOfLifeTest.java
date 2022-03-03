@@ -83,8 +83,7 @@ public class GameOfLifeTest {
         };
         GameOfLife cgol = new GameOfLife(seed);
 
-        assertThat(cgol.currentGrid()).isEqualTo(3);
-
+        assertThat(cgol.currentGrid()).isDeepEqualTo(seed);
     }
 
 }

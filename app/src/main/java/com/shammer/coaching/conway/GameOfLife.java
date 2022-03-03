@@ -65,8 +65,8 @@ public class GameOfLife {
 
         rangeClosed(bounds.lowerRowBound, bounds.upperRowBound)
                 .forEach(x -> IntStream.rangeClosed(bounds.lowerColBound, bounds.upperColBound)
-                        .filter(y -> x != row || y != col)
                         .filter(y -> grid[x][y].equals(ALIVE))
+                        .filter(y -> x != row || y != col)
                         .forEach(y -> {
                             liveCount.getAndIncrement();
                             // System.out.format("%d,%d %s\n", x, y, grid[x][y]);
