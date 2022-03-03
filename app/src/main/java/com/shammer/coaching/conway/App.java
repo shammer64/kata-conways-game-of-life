@@ -3,12 +3,43 @@
  */
 package com.shammer.coaching.conway;
 
+import javax.swing.*;
+
+import java.util.Random;
+
+import static java.util.stream.IntStream.range;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+
+    public static final String ARGS_MSG = "Three positive integer args are expected";
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        if (args.length != 3) throw new IllegalArgumentException(ARGS_MSG);
+        int rows;
+        int cols;
+        int generations;
+        try {
+            rows = Integer.parseInt(args[0]);
+            cols = Integer.parseInt(args[1]);
+            generations = Integer.parseInt(args[2]);
+            if (rows <= 0 || cols <= 0) throw new IllegalArgumentException(ARGS_MSG);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ARGS_MSG, e);
+        }
+
+        // generate random starting grid
+        Character[][] initialGameGrid = generateRandomGrid(rows, cols);
+        JFrame frame = new GameOfLifeFrame(new GameOfLife(initialGameGrid));
+    }
+
+    private static Character[][] generateRandomGrid(int rows, int cols) {
+        Character[][] grid = new Character[rows][cols];
+        range(0, grid.length)
+                .forEach(row -> range(0, grid[row].length)
+                        .forEach(col -> {
+                            double rnd = Math.random();
+                            grid[row][col] = rnd > 0.5 ? GameOfLife.ALIVE : GameOfLife.DEAD;
+                        }));
+        return grid;
     }
 }

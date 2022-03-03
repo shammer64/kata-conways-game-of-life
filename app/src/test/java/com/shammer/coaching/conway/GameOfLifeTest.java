@@ -20,11 +20,11 @@ public class GameOfLifeTest {
         assertThat(cgol.toString()).isEqualTo("   \n XX\n XX");
     }
 
-@ParameterizedTest
-@CsvSource({"0,0,1", "0,1,2", "0,2,2",
+    @ParameterizedTest
+    @CsvSource({"0,0,1", "0,1,2", "0,2,2",
         "1,0,2", "1,1,3", "1,2,3",
         "2,0,2", "2,1,3", "2,2,3"})
-public void can_get_count_of_live_neighbors(int row, int col, int expectedNeighbors) {
+    public void can_get_count_of_live_neighbors(int row, int col, int expectedNeighbors) {
         Character[][] seed =  {
                 {' ',' ',' '},
                 {' ','X','X'},
@@ -59,6 +59,32 @@ public void can_get_count_of_live_neighbors(int row, int col, int expectedNeighb
         cgol.evolve();
 
         assertThat(cgol.toString()).isEqualTo("XXX\nX X\nXXX");
+    }
+
+    @Test
+    public void can_get_grid_dimensions() {
+        Character[][] seed =  {
+                {' ','X',' '},
+                {'X','X','X'},
+                {' ','X',' '},
+        };
+        GameOfLife cgol = new GameOfLife(seed);
+
+        assertThat(cgol.width()).isEqualTo(3);
+        assertThat(cgol.height()).isEqualTo(3);
+    }
+
+    @Test
+    public void can_get_current_grid() {
+        Character[][] seed =  {
+                {' ','X',' '},
+                {'X','X','X'},
+                {' ','X',' '},
+        };
+        GameOfLife cgol = new GameOfLife(seed);
+
+        assertThat(cgol.currentGrid()).isEqualTo(3);
+
     }
 
 }

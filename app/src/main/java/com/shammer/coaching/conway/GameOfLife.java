@@ -10,8 +10,8 @@ import static java.util.stream.IntStream.rangeClosed;
 
 public class GameOfLife {
     private Character[][] grid;
-    private static final char ALIVE = 'X';
-    private static final char DEAD = ' ';
+    public static final char ALIVE = 'X';
+    public static final char DEAD = ' ';
 
     public GameOfLife(Character[][] seed) {
         super();
@@ -82,6 +82,18 @@ public class GameOfLife {
         bounds.lowerColBound = col > 0 ? col - 1 : 0;
         bounds.upperColBound = col < grid[row].length - 1 ? col + 1 : grid[row].length - 1;
         return bounds;
+    }
+
+    public int width() {
+        return grid.length;
+    }
+
+    public int height() {
+        return grid[0].length;
+    }
+
+    public Character[][] currentGrid() {
+        return this.grid;
     }
 
     private class Bounds {
