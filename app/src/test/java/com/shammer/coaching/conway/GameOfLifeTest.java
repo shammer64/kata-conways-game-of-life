@@ -43,6 +43,7 @@ public class GameOfLifeTest {
                 {' ',' ','X'},
         };
         GameOfLife cgol = new GameOfLife(seed);
+
         cgol.evolve();
 
         assertThat(cgol.toString()).isEqualTo("   \n   \n   ");
@@ -56,6 +57,7 @@ public class GameOfLifeTest {
                 {' ','X',' '},
         };
         GameOfLife cgol = new GameOfLife(seed);
+
         cgol.evolve();
 
         assertThat(cgol.toString()).isEqualTo("XXX\nX X\nXXX");
